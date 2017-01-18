@@ -1,3 +1,4 @@
+package br.com.cancastilho.config;
 // package br.com.cancastilho;
 //
 // import org.springframework.beans.factory.annotation.Autowired;
