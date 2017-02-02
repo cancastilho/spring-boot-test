@@ -17,6 +17,6 @@ public class CsrfTokenController {
 
 	@RequestMapping("/gerarToken")
 	public @ResponseBody String gerarToken(HttpServletRequest request) {
-		return csrfRepository.generateToken(null).getToken();
+		return csrfRepository.generateToken(request).getToken();
 	}
 }

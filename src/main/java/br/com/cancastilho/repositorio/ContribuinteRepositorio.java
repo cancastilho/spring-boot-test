@@ -11,24 +11,22 @@ import br.com.cancastilho.modelo.Contribuinte;
 
 @Transactional
 @RepositoryRestResource(path = "contribuintes")
-public interface ContribuinteRepositorio extends JpaRepository<Contribuinte, Long> {
+public interface ContribuinteRepositorio extends JpaRepository<Contribuinte, Long>, ContribuinteRepositorioCustom {
 
 	List<Contribuinte> findByNomeStartsWith(@Param("nome") String nome);
 
-	List<Contribuinte> findByNomeStartingWithIgnoreCase(@Param("nome") String nome); // SQL
-																						// =>
-	// LIKE
-	// 'model%'
+	// SQL => LIKE 'model%'
+	List<Contribuinte> findByNomeStartingWithIgnoreCase(@Param("nome") String nome);
 
-	List<Contribuinte> findByNomeEndingWithIgnoreCase(@Param("nome") String nome); // SQL
-																					// =>
-	// LIKE
-	// '%model'
+	// SQL => LIKE '%model'
+	List<Contribuinte> findByNomeEndingWithIgnoreCase(@Param("nome") String nome);
 
-	List<Contribuinte> findByNomeContainingIgnoreCase(@Param("nome") String nome); // SQL
-																					// =>
-	// LIKE
-	// '%model%'
+	// SQL => LIKE '%model%'
+	List<Contribuinte> findByNomeContainingIgnoreCase(@Param("nome") String nome);
 
 	List<Contribuinte> findByBairroContaining(@Param("bairro") String bairro);
+
+	List<Contribuinte> findByNome(String nome);
+
+	UserContribuinte findById(Long id);
 }

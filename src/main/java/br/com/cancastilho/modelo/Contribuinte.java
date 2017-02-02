@@ -1,10 +1,13 @@
 package br.com.cancastilho.modelo;
 
+import java.util.List;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 import lombok.Getter;
@@ -29,5 +32,11 @@ public class Contribuinte {
 	private String numero;
 	private String bairro;
 	private String complemento;
+
+	@OneToMany(mappedBy = "contribuinteId")
+	private List<Telefone> telefones;
+
+	@OneToMany(mappedBy = "contribuinteId")
+	private List<Imovel> imoveis;
 
 }
