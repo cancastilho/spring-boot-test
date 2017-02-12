@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.cancastilho.modelo.Contribuinte;
 
 @Transactional
-@RepositoryRestResource(path = "contribuintes")
 public interface ContribuinteRepositorio extends JpaRepository<Contribuinte, Long>, ContribuinteRepositorioCustom {
 
 	List<Contribuinte> findByNomeStartsWith(@Param("nome") String nome);
@@ -29,4 +27,6 @@ public interface ContribuinteRepositorio extends JpaRepository<Contribuinte, Lon
 	List<Contribuinte> findByNome(String nome);
 
 	UserContribuinte findById(Long id);
+
+	void delete(Long id);
 }

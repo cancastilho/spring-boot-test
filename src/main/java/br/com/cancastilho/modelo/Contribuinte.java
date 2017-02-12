@@ -1,20 +1,29 @@
 package br.com.cancastilho.modelo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@SequenceGenerator(name = "HB_SEQ", sequenceName = "ContribuinteSeq", initialValue = 2000)
 public class Contribuinte implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "HB_SEQ")
 	private Long id;
 	private String nome;
 
@@ -24,87 +33,35 @@ public class Contribuinte implements java.io.Serializable {
 	private String numero;
 	private String bairro;
 	private String complemento;
+	private String email;
 
-	@OneToMany(mappedBy = "contribuinteId")
-	private List<Telefone> telefones = new ArrayList<>();
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "contribuinteId")
+	private Set<Telefone> telefones = new HashSet();
 
-	@OneToMany(mappedBy = "contribuinteId")
-	private List<Imovel> imoveis = new ArrayList<>();
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "contribuinteId")
+	private Set<Imovel> imoveis = new HashSet();
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Cpf getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(Cpf cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public List<Telefone> getTelefones() {
+	public Set<Telefone> getTelefones() {
 		return telefones;
 	}
 
-	public void setTelefones(List<Telefone> telefones) {
+	public void setTelefones(Set<Telefone> telefones) {
 		this.telefones = telefones;
+	}
+
+	public Set<Imovel> getImoveis() {
+		return imoveis;
+	}
+
+	public void setImoveis(Set<Imovel> imoveis) {
+		this.imoveis = imoveis;
 	}
 
 	public void adicionarImovel(Imovel i) {
 		this.imoveis.add(i);
-	}
 
-	public List<Imovel> getImoveis() {
-		return imoveis;
-	}
-
-	public void setImoveis(List<Imovel> imoveis) {
-		this.imoveis = imoveis;
 	}
 
 }

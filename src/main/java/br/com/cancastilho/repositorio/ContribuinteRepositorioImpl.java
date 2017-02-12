@@ -1,6 +1,8 @@
 package br.com.cancastilho.repositorio;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -33,7 +35,9 @@ public class ContribuinteRepositorioImpl implements ContribuinteRepositorioCusto
 		List<Imovel> imoveis = this.jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Imovel.class),
 				contribuinte.getId());
 
-		contribuinte.setImoveis(imoveis);
+		Set conjunto = new HashSet();
+		conjunto.addAll(imoveis);
+		contribuinte.setImoveis(conjunto);
 		return contribuinte;
 	}
 
