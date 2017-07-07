@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<head>
+<meta charset="UTF-8" />
+<title>Novo Contribuinte</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+		<h1>Novo Contribuinte</h1>
+
+		<form th:action="@{/contribuinte/salvar}" th:object="${contribuinte}"
+			method="post">
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">Nome</span> <input
+					th:field="${contribuinte.nome}" type="text" class="form-control"
+					placeholder="Nome" aria-describedby="basic-addon1" />
+			</div>
+			<br />
+			<div class="input-group">
+				<span class="input-group-addon" id="basic-addon1">E-mail</span> <input
+					th:field="${contribuinte.email}" type="text" class="form-control"
+					placeholder="E-mail" aria-describedby="basic-addon1" />
+			</div>
+			<br />
+			<button type="submit" class="btn btn-secondary">Salvar</button>
+		</form>
+	</div>
+</body>
+</html>

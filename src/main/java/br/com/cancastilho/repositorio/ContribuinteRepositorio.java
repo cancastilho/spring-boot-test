@@ -26,7 +26,7 @@ public interface ContribuinteRepositorio extends JpaRepository<Contribuinte, Lon
 
 	List<Contribuinte> findByNome(String nome);
 
-	UserContribuinte findById(Long id);
+	Contribuinte findById(Long id);
 
 	void delete(Long id);
 }

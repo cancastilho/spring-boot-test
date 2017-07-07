@@ -46,13 +46,27 @@ public class ContribuinteControlador {
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-	public void delete(@PathVariable("id") Long id) {
+	public boolean delete(@PathVariable("id") Long id) {
 		this.repositorio.delete(id);
+		return true;
+	}
+
+	@GetMapping("{id}")
+	public Contribuinte get(@PathVariable Long id) {
+		return this.repositorio.findOne(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Contribuinte criar(@RequestBody Contribuinte c) {
-		System.out.println(c);
 		return this.repositorio.save(c);
 	}
+
+	@RequestMapping(method = RequestMethod.PUT)
+	public Contribuinte update(@RequestBody Contribuinte c) {
+		if (this.repositorio.findOne(c.getId()) == null) {
+			throw new RuntimeException("Entidade não existe.");
+		}
+		return this.repositorio.save(c);
+	}
+
 }

@@ -11,8 +11,9 @@ public class CorsConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*")
+		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+				.allowedHeaders("*")
 				// .exposedHeaders("header1", "header2")
-				.allowCredentials(false).maxAge(3600);
+				.allowCredentials(true).maxAge(3600);
 	}
 }

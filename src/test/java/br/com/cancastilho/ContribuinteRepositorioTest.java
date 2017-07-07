@@ -26,7 +26,6 @@ import br.com.cancastilho.modelo.Contribuinte;
 import br.com.cancastilho.modelo.Imovel;
 import br.com.cancastilho.repositorio.ContribuinteRepositorio;
 import br.com.cancastilho.repositorio.ImovelRepositorio;
-import br.com.cancastilho.repositorio.UserContribuinte;
 import br.com.cancastilho.util.GeradorDePdf;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -68,7 +67,7 @@ public class ContribuinteRepositorioTest {
 	// @Test
 	public void testar_projecao_spring_data() {
 		// Apenas getNome disponível
-		UserContribuinte findById = repositorio.findById(1L);
+		Contribuinte findById = repositorio.findById(1L);
 		System.out.println(findById);
 	}
 
